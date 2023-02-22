@@ -366,7 +366,8 @@ int handleCommandLine(int argc, char const* argv[])
 				}
 			}
 			else
-			if (!context.m_capture->saveGroupsLog(outFilePath, sorting, context.m_symbolResolver))
+			//if (!context.m_capture->saveGroupsLog(outFilePath, sorting, context.m_symbolResolver))
+			if (!context.m_capture->saveLog(outFilePath, context.m_symbolResolver))
 			{
 				err("ERROR: Could not save output file!");
 			}

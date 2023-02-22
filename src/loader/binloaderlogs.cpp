@@ -129,6 +129,9 @@ bool Capture::saveLog(const char* _path, uintptr_t _symResolver )
 		const char* opType = gGetStringFromOperation(opEx->m_operationType);
 
 		fprintf(f, "\n%s  size: %d\n", opType, opEx->m_allocSize);
+		fprintf(f, "Time: %d\n", opEx->m_operationTime);
+		fprintf(f, "pointer: %x\n", opEx->m_pointer);
+
 
 		StackTrace* trace = opEx->m_stackTrace;
 	
@@ -137,7 +140,7 @@ bool Capture::saveLog(const char* _path, uintptr_t _symResolver )
 			fprintf(f, "No call stack");
 			continue;
 		}
-
+		fprintf(f, "Call stack:\n");
 		uint32_t numFrames = (uint32_t)trace->m_numEntries;
 		for (uint32_t e=0; e<numFrames; e++)
 		{
@@ -218,6 +221,9 @@ bool Capture::saveGroupsLog(const char* _path, eGroupSort _sorting, uintptr_t _s
 			fprintf(f, "\n%s  size: %d-%d   group operations: %d\n", opType, group->m_minSize, group->m_maxSize, group->m_count);
 		else
 			fprintf(f, "\n%s  size: %d   group operations: %d\n", opType, group->m_minSize, group->m_count);
+
+
+		fprintf(f, "Operation time: %d\n", opEx->m_operationTime);
 
 		StackTrace* trace = opEx->m_stackTrace;
 	
